@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;700&family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+
+<body>
+  <section class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h1>Password Security Manager</h1>
+                <p>This online tool could help you secure your account</p>
+                <p>Enter your password in the space provided below: </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8">
+                <form>
+                    <div class="form-group">
+                        <input class="form-control" id="txtpassword" placeholder="Please enter your Password here!"></input>
+                    </div>
+
+                    <div class="form-group">
+                        <button id="btnProceed">Enter</button>
+                    </div>                    
+                </form>
+            </div>
+
+            <div class="col-md-4">
+                <p id="outputInfo">Password Strength</p>
+            </div>
+        </div>
+    </section>
+
+
+  <script>
+    // Select all elements of interest
+    let txtpassword = document.getElementById("txtpassword");
+    let txtConfirmPassword = document.getElementById("txtConfirmPassword");
+
+    let btnProceed = document.getElementById("btnProceed");
+    let outputInfo = document.getElementById("outputInfo");
+
+    txtpassword.addEventListener("keypress", VerifyPassword);
+
+
+    function VerifyPassword() {
+     // alert("hi");
+    // Initialize variables
+    var password = txtpassword.value;
+    strength = 0;
+        // password length
+    if (password.length >= 8) {
+        strength++;
+    } else {
+        outputInfo.innerHTML = "Password cannot be less than 8 characters";
+    }
+  
+    // for mixed case
+    if (password.match(/[a-z]/)) {
+      strength++;
+    } else {
+        outputInfo.innerHTML = "Use at least one lowercase letters.";
+    }
+
+    if (password.match(/[A-Z]/)) {
+      strength++;
+    } else {
+        outputInfo.innerHTML = "Use at one uppercase letters.";
+    }
+  
+    // Check for numbers
+    if (password.match(/\d/)) {
+      strength++;
+    } else {
+        outputInfo.innerHTML = "Include at least one number.";
+    }
+  
+    // Check for special characters
+    if (password.match(/[^a-zA-Z0-9]/)) {
+      strength++;
+    } else {
+        outputInfo.innerHTML = "Include at least one special character. ";
+    }
+  
+    // Results
+    if (strength < 2) {
+      outputInfo.innerHTML = "Password Too Weak: " + outputInfo.innerHTML;
+    } else if (strength == 2) {
+      outputInfo.innerHTML = " Password Weak: " + outputInfo.innerHTML;
+    } else if (strength == 3) {
+      outputInfo.innerHTML = " Strong " + outputInfo.innerHTML;
+    } else {
+      outputInfo.innerHTML = "Very Strong" + outputInfo.innerHTML;
+    }
+  }
+  </script>  
+
+  
+    
+</body>
+</html>
+
+
+  
